@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Contact from '../screens/Contact';
+import Profile from '../screens/Profile';
 
 const Stack = createStackNavigator();
 
@@ -13,12 +13,12 @@ const screenOptionStyle = {
   headerBackTitle: 'Back',
 };
 
-const ContactStackNavigator = () => {
+const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="get" component={Contact} />
+      <Stack.Screen name="myProfile" component={Profile} options={{ headerShown:false}}/>
     </Stack.Navigator>
   );
 };
 
-export default ContactStackNavigator;
+export default ProfileStackNavigator;

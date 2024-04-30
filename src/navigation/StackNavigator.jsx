@@ -2,7 +2,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from '../screens/Home';
-import About from '../screens/About';
+import Detail from '../screens/Detail';
+import Popular from '../screens/Popular';
 
 const Stack = createStackNavigator();
 
@@ -17,8 +18,9 @@ const screenOptionStyle = {
 export default function MainStackNavigator() {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Home" component={Home} options={{ headerShown:false}}/>
+      <Stack.Screen name="Detail" component={Detail} options={{ headerShown:false}}/>
+      <Stack.Screen name="Popular" component={Popular} options={{ headerShown:false}}/>
     </Stack.Navigator>
   );
 }
