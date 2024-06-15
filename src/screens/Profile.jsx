@@ -1,16 +1,34 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLogout } from '../storages/action/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const Create = () => {
+  const authData = useSelector(state => state.auth.data)
+  const dispatch = useDispatch()
+  const navigation = useNavigation()
+  const navigateToMyResep = () => {
+    navigation.navigate('myResep');
+};
+  const navigateToUpdateProfile = () =>{
+    navigation.navigate('updateProfile')
+  }
+
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.MyInfo}>
-        <Image style={styles.Image} source={require('../img/tmb.png')} />
-        <Text style={styles.Name}> My Name</Text>
+
+        {authData?.userData?.foto ? <Image style={styles.Image} source={{uri : authData?.userData?.foto}} /> 
+        :
+        <Image style={styles.Image} source={require('../img/tmb.png')} />}
+        <Text style={styles.Name}>{authData ? authData?.userData?.nama : null} </Text>
       </View>
       <View style={styles.ProfileDetail}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={navigateToUpdateProfile}>
         <View style={styles.Detail}>
             <View style={{flexDirection:'row'}}>
             <Ionicons name="person-outline" color="#EEC302" size={28} style={styles.icon} />
@@ -19,7 +37,7 @@ const Create = () => {
             <Ionicons name="chevron-forward-outline" color="grey" size={28} style={styles.icon} />
         </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigateToMyResep()}>
         <View style={styles.Detail}>
             <View style={{flexDirection:'row'}}>
             <Ionicons name="ribbon-outline" color="#EEC302" size={28} style={styles.icon} />
@@ -46,8 +64,18 @@ const Create = () => {
             <Ionicons name="chevron-forward-outline" color="grey" size={28} style={styles.icon} />
         </View>
         </TouchableOpacity>
+        <TouchableOpacity  onPress={() => dispatch(authLogout())}>
+        <View style={styles.Detail}>
+            <View style={{flexDirection:'row'}}>
+            <Ionicons name="log-out-outline" color="#EEC302" size={28} style={styles.icon} />
+            <Text>Log Out Account</Text>
+            </View>
+            <Ionicons name="chevron-forward-outline" color="grey" size={28} style={styles.icon} />
+        </View>
+        </TouchableOpacity>
       </View>
     </View>
+    </ScrollView>
   );
 };
 

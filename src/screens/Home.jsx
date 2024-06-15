@@ -11,7 +11,27 @@ const Home = () => {
     const navigateToPopular = () => {
         navigation.navigate('Popular');
     };
-  const [searchQuery, setSearchQuery] = useState('');
+    const navigateToSoup = () => {
+      searchQuery = 'soup'
+      navigation.navigate('Search', { searchQuery });
+    }
+
+    const navigateToNasi = () => {
+      searchQuery = 'nasi'
+      navigation.navigate('Search', { searchQuery });
+    }
+
+    const navigateToIkan = () => {
+      searchQuery = 'ikan'
+      navigation.navigate('Search', { searchQuery });
+    }
+
+    const navigateToAyam = () => {
+      searchQuery = 'ayam'
+      navigation.navigate('Search', { searchQuery });
+    }
+
+  let [searchQuery, setSearchQuery] = useState('');
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -34,22 +54,30 @@ const Home = () => {
         </TouchableOpacity>
       </View>
     <View style={{ flexDirection: 'row', marginTop: 17,justifyContent: 'space-evenly', marginRight:10}}>
+    <TouchableOpacity onPress={navigateToSoup}>
     <View style={styles.imageContainer}>
         <Image source={require('../img/img1.png')} style={styles.logo} />
         <Text style={styles.caption}>Soup</Text>
     </View>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={navigateToNasi}>
     <View style={styles.imageContainer}>
         <Image source={require('../img/img2.png')} style={styles.logo} />
-        <Text style={styles.caption}>Salad</Text>
+        <Text style={styles.caption}>Nasi</Text>
     </View>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={navigateToIkan}>
     <View style={styles.imageContainer}>
         <Image source={require('../img/img3.png')} style={styles.logo} />
-        <Text style={styles.caption}>Main Course</Text>
+        <Text style={styles.caption}>Ikan</Text>
     </View>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={navigateToAyam}>
     <View style={styles.imageContainer}>
-        <Image source={require('../img/img4.png')} style={styles.logo} />
-        <Text style={styles.caption}>Dessert</Text>
+        <Image source={require('../img/chic.jpg')} style={styles.logo} />
+        <Text style={styles.caption}>Ayam</Text>
     </View>
+    </TouchableOpacity>
 </View>
     <View>
       <Text style={styles.title}>Popular Recipes</Text>

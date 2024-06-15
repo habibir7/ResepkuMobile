@@ -1,10 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MainStackNavigator from './StackNavigator';
-import AuthStackNavigator from './AuthStackNavigator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CreateStackNavigator from './CreateStackNavigator';
 import ProfileStackNavigator from './ProfileStackNavigator';
+import MessageList from '../screens/MessageList';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +35,7 @@ const BottomTabNavigator = () => {
       }}
       
       />
-      <Tab.Screen name="Auth" component={AuthStackNavigator} options={{ headerShown:false,
+      <Tab.Screen name="Message" component={MessageList} options={{ headerShown:false,
       tabBarIcon: ({color}) => (
         <Ionicons name="chatbubble-outline" color={color} size={40} />
       ) ,

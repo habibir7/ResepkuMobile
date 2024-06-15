@@ -27,13 +27,12 @@ const MyCarousel = () => {
     };
 
     useEffect(()=> {
-        console.log(data)
     },[data])
     const renderItem = ({ item }) => (
         <TouchableOpacity onPress={() => navigateToDetail(item.idresep)}>
         <View style={styles.item}>
             {item.foto ? (<Image source={{ uri : item.foto}} style={styles.image}/>) : 
-           ( <Image source={require('../img/tmb.png')} style={styles.image}/>)}
+            ( <Image source={require('../img/tmb.png')} style={styles.image}/>)}
             <Text style={styles.title}>{item.nama_resep}</Text>
         </View>
         </TouchableOpacity>

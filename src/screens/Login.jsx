@@ -1,9 +1,13 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import {authLogin} from '../storages/action/auth'
 
 const Login = () => {
+    const dispatch = useDispatch()
+    const auth = useSelector(state => state.auth)
     const navigation = useNavigation();
     const navigateToRegister = () => {
         navigation.navigate('Register');
@@ -12,7 +16,20 @@ const Login = () => {
         navigation.navigate('ForgotPassword')
     };
     const navigateToHome = () => {
-        navigation.navigate('Home');
+        navigation.navigate('MainScreen');
+    };
+
+    const [inputData, setInputData] = useState({
+      email: "",
+      password: "",
+    });
+  
+    const onChange = (name, value) => {
+      setInputData({ ...inputData, [name]: value });
+    };
+  
+    const postData = () => {
+      dispatch(authLogin(inputData, () => navigation.navigate('MainScreen')));
     };
   return (
     <View style={styles.container}>
@@ -23,16 +40,24 @@ const Login = () => {
       <Text style={{fontSize:10,color:'#C4C4C4'}}>Log in to your existing account.</Text>
       <View style={styles.inputTitle}>
         <Ionicons name="person-outline" color="#EFC81A" size={28} style={styles.icon} />
-        <TextInput style={styles.input} placeholder='examplexxx@gmail.com' />
+        <TextInput 
+        style={styles.input}
+        placeholder='Email'
+        value={inputData.email}
+        onChangeText={(text) => onChange('email', text)} />
       </View>
       <View style={styles.inputTitle}>
         <Ionicons name="lock-closed-outline" color="#EFC81A" size={28} style={styles.icon} />
-        <TextInput secureTextEntry={true} style={styles.input} placeholder='Password' />
+        <TextInput secureTextEntry={true}
+         style={styles.input}
+          placeholder='Password'
+          value={inputData.password}
+          onChangeText={(text) => onChange('password', text)} />
       </View>
       <TouchableOpacity style={styles.forgotpasswordtext} onPress={() => navigateToForgotPassword()}>
         <Text style={styles.forgotpassword}>Forgot Password ?</Text>
       </TouchableOpacity>
-	  <TouchableOpacity style={styles.PostButton} onPress={() => navigateToHome()}>
+	  <TouchableOpacity style={styles.PostButton} onPress={postData}>
 		<Text style={styles.PostButtonText}>Login</Text>
 	  </TouchableOpacity>
       <View style={styles.register}>
@@ -41,6 +66,8 @@ const Login = () => {
             <Text style={styles.registertext}>Sign Up</Text>
         </TouchableOpacity>
       </View>
+      {auth.isLoading ? <Text style={{color:"blue",fontSize:10}}>Logging to your account</Text> : null}
+      {auth.isError ? <Text style={{color:"red",fontSize:10}}>Log in Error :  {auth.ErrorMessage ?? "-"}</Text> : null}
     </View>
   );
 };

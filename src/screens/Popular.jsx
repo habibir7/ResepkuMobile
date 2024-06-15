@@ -13,7 +13,6 @@ const Popular = ({navigation}) => {
     return(
         <View style={styles.container}>
             <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-                <Text>Wellcome</Text>
                 <Ionicons name="arrow-back-outline" size={24} color="black" />
             </TouchableOpacity>
             <ResepList/>

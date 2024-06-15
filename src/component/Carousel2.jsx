@@ -11,10 +11,19 @@ const Carousel2 = () => {
         fetchData();
     }, []);
 
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      };
+
     const fetchData = async () => {
         try {
             const response = await axios.get('https://resepku-rouge.vercel.app/resep');
-            setData(response.data.data.slice(0, 5)); // Limit to show only 5 items
+            const shuffledData = shuffleArray(response.data.data);
+            setData(shuffledData.slice(0, 5)); // Limit to show only 5 items
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -22,7 +31,11 @@ const Carousel2 = () => {
 
     const renderItem = ({ item }) => (
         <View style={styles.card}>
-            <Image source={{ uri: item.foto }} style={styles.image} />
+            {item.foto ?
+          <Image source={{ uri: item.foto }} style={styles.image} /> 
+          :
+          <Image source={require('../img/tmb.png')} style={styles.image} />
+          }
             <View style={styles.cardContent}>
                 <Text style={styles.title}>{item.nama_resep}</Text>
                 <Text style={styles.caption}>{item.nama_resep} with {item.komposisi}</Text>

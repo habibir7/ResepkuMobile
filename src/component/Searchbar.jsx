@@ -2,10 +2,12 @@ import * as React from 'react';
 import { Searchbar } from 'react-native-paper';
 import { Keyboard } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = React.useState('');
   const searchbarRef = React.useRef();
+  const navigation = useNavigation();
 
   const handleSearchbarPress = () => {
     // Focus the input field
@@ -14,6 +16,8 @@ const Search = () => {
     setTimeout(() => {
       setSearchQuery(searchQuery); // This is a hacky way to force a re-render
     }, 0);
+    console.log(searchQuery)
+    navigation.navigate('Search', { searchQuery });
   };
 
   return (
@@ -21,8 +25,8 @@ const Search = () => {
     placeholder="Search Pasta, Nasi, etc"
     onChangeText={setSearchQuery}
     value={searchQuery}
-    onPress={handleSearchbarPress}
-    icon={() => <Ionicons name="search-outline" size={26}/>}
+    
+    icon={() => <Ionicons name="search-outline" size={26} onPress={handleSearchbarPress}/> }
     style={{marginBottom: 20,}}
     />
   );

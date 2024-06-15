@@ -46,7 +46,6 @@ const ResepList = () => {
     };
 
     useEffect(()=> {
-        console.log(data)
     },[data])
 
     const renderItem = ({ item }) => (
@@ -82,10 +81,6 @@ const ResepList = () => {
 
     return (
         <View style={styles.container}>
-             <TouchableOpacity onPress={handleBack} style={styles.backButton}>
-                <Text>Wellcome</Text>
-                <Ionicons name="arrow-back-outline" size={24} color="black" />
-            </TouchableOpacity>
             <FlatList
                 data={data}
                 renderItem={renderItem}
@@ -100,6 +95,7 @@ const ResepList = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 60
     },
     backButton: {
         position: 'absolute',

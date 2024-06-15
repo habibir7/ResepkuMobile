@@ -1,9 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-
 import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import Popular from '../screens/Popular';
+import SearchResult from '../screens/SearchResult';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +21,7 @@ export default function MainStackNavigator() {
       <Stack.Screen name="Home" component={Home} options={{ headerShown:false}}/>
       <Stack.Screen name="Detail" component={Detail} options={{ headerShown:false}}/>
       <Stack.Screen name="Popular" component={Popular} options={{ headerShown:false}}/>
+      <Stack.Screen name="Search" component={SearchResult} options={{ headerShown:false}}/>
     </Stack.Navigator>
   );
 }
